@@ -2,7 +2,7 @@
 
 ### Descripción del proyecto:
 
-Este proyecto corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos a relacionados minimización de ecuaciones booleanas.
+Este proyecto corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos relacionados a la minimización de ecuaciones booleanas.
 
 
 #### Implementación de algoritmos relacionados a la minimización de ecuaciones booleanas. 
