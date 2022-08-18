@@ -11,11 +11,6 @@ Desarrollo de una implementación del algoritmo __Quine-McCluskey__ para la simp
 
 
 
-### Documentación:
-
-
-
-
 
 ### Colaboradores
 
