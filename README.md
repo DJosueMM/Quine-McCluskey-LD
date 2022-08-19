@@ -1,10 +1,10 @@
 # Quine-McCluskey-LD
 
-<p align="center">
- ![image](https://user-images.githubusercontent.com/81501061/185662130-d04918a9-33e2-49b5-acfb-f2005af9935b.png)
-  <img alt="Fiber" height="125" src="[https://raw.githubusercontent.com/gofiber/docs/master/static/fiber_v2_logo.svg](https://user-images.githubusercontent.com/81501061/185662130-d04918a9-33e2-49b5-acfb-f2005af9935b.png)">
 
+![image](https://user-images.githubusercontent.com/81501061/185663411-8707d064-fd77-4a8a-93d1-a4274f508120.png)
+By &lt;a href=&quot;//commons.wikimedia.org/wiki/User:Jochen_Burghardt&quot; title=&quot;User:Jochen Burghardt&quot;&gt;Jochen Burghardt&lt;/a&gt; - &lt;span class=&quot;int-own-work&quot; lang=&quot;en&quot;&gt;Own work&lt;/span&gt;, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=91198313">Link</a>
 ### Descripción del proyecto:
+
 
 Este proyecto corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos relacionados a la minimización de ecuaciones booleanas.
 
