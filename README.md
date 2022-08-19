@@ -1,5 +1,9 @@
 # Quine-McCluskey-LD
 
+<p align="center">
+ ![image](https://user-images.githubusercontent.com/81501061/185662130-d04918a9-33e2-49b5-acfb-f2005af9935b.png)
+  <img alt="Fiber" height="125" src="[https://raw.githubusercontent.com/gofiber/docs/master/static/fiber_v2_logo.svg](https://user-images.githubusercontent.com/81501061/185662130-d04918a9-33e2-49b5-acfb-f2005af9935b.png)">
+
 ### Descripción del proyecto:
 
 Este proyecto corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos relacionados a la minimización de ecuaciones booleanas.
