@@ -3,11 +3,6 @@
 Este proyecto corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos relacionados a la minimización de ecuaciones booleanas.
 
 
-![image](https://user-images.githubusercontent.com/81501061/185663411-8707d064-fd77-4a8a-93d1-a4274f508120.png)
-
-<div style="text-align: centered"> By Jochen Burghardt - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=91198313 </div>
-
-
 
 
 
