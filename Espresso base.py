@@ -14,8 +14,8 @@ import string
     
 a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z = map(exprvar, string.ascii_lowercase) #Literales
 
-lf1 = Or((a&b&c),(~a&~b&c),(~a&~b&c),(~a&~b&~c)) 
+lf1 = Or((a&b&c),(~a&~b&c),(~a&~b&c),(~a&~b&~c)) #Función Booleana inicial
 
-f1m = espresso_exprs(lf1)
+f1m = espresso_exprs(lf1) #Minimización mediante Espresso
 
 print(f1m)
