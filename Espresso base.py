@@ -19,3 +19,32 @@ lf1 = Or((a&b&c),(~a&~b&c),(~a&~b&c),(~a&~b&~c)) #Función Booleana inicial
 f1m = espresso_exprs(lf1) #Minimización mediante Espresso
 
 print(f1m)
+
+
+""" SOLICITUD DE DATOS AL USUARIO -----------------------------------------------------------------------------------------------"""
+
+string_Minterms = input("Suma de minterminos:  ")
+minterminos_Lista = string_Minterms.split(",")  # Con esto cada mintermino se mete en una lista
+
+num_variables = int(input("Cantidad de variables: "))
+
+print("\n") 
+
+
+def ObtenerY ():
+    
+    Y6var = "---------------------------------------------------------------" 
+    
+    
+    
+    
+    return Yval
+
+def EspressoMin (num_variables,Yval):
+    X = ttvars('x', num_variables)
+    fbool = truthtable(X, "0000011111------------------------------------------------------")
+    fboolm = espresso_tts(fbool)
+    return fboolm
+
+print(EspressoMin(num_variables,1))
+
