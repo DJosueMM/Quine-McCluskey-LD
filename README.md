@@ -1,6 +1,6 @@
 # Quine-McCluskey-LD
 
-Este proyecto corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos relacionados a la minimización de ecuaciones booleanas.
+Este repositorio corresponde al Proyecto 1 del curso de Diseño Lógico del Instituto Tecnológico de Costa Rica. Donde el objetivo general es la introducción en la  implementación de algoritmos relacionados a la minimización de ecuaciones booleanas.
 
 
 
