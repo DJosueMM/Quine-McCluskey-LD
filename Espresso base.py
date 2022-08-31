@@ -5,20 +5,43 @@ PyEDA https://github.com/cjdrake/pyeda incluye una extensión de la librería de
   no oficial de python el cuál solo funciona para Python 3.9 (o inferiores con un nuevo archivo .whl)
 """
 from pyeda.inter import * 
-
 import string
 
-#----------------------------------------------------------------------------------------------------------------------------------
 
-#Implementación básica en consola:
+#VARIABLES GLOBALES
+Y6var = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" 
+
+
+#FUNCIONES
+
+
+def ObtenerYtts (minterminos, Y):
     
-a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z = map(exprvar, string.ascii_lowercase) #Literales
+    Y6var_lista = Y.split(",")
+    
+    minTer = minterminos  
+    minTer_int = list(map(int,  minTer))
+    Y6var_int_list = list(map(int, Y6var_lista))
+    
 
-lf1 = Or((a&b&c),(~a&~b&c),(~a&~b&c),(~a&~b&~c)) #Función Booleana inicial
+    for i in minTer_int :
+        Y6var_int_list[i] = 1
+    
+   
+    Y6var_int_list = list(map(str, Y6var_int_list))
+    Ytts = "".join(Y6var_int_list)
+   
+    return Ytts
 
-f1m = espresso_exprs(lf1) #Minimización mediante Espresso
 
-print(f1m)
+
+def EspressoMin (num_variables,Ytts):
+    X = ttvars('x', num_variables)
+    fbool = truthtable(X,Ytts)
+    fboolm = espresso_tts(fbool)
+    return fboolm
+
+#----------------------------------------------------------------------------------------------------------------------------------
 
 
 """ SOLICITUD DE DATOS AL USUARIO -----------------------------------------------------------------------------------------------"""
@@ -31,20 +54,5 @@ num_variables = int(input("Cantidad de variables: "))
 print("\n") 
 
 
-def ObtenerY ():
-    
-    Y6var = "---------------------------------------------------------------" 
-    
-    
-    
-    
-    return Yval
-
-def EspressoMin (num_variables,Yval):
-    X = ttvars('x', num_variables)
-    fbool = truthtable(X, "0000011111------------------------------------------------------")
-    fboolm = espresso_tts(fbool)
-    return fboolm
-
-print(EspressoMin(num_variables,1))
+print(EspressoMin(num_variables, ObtenerYtts(minterminos_Lista, Y6var)))
 
