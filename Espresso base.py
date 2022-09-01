@@ -8,41 +8,49 @@ from pyeda.inter import *
 import string
 
 
-#VARIABLES GLOBALES
-Y6var = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" 
-
-
 #FUNCIONES
 
 
-def ObtenerYtts (minterminos, Y):
+"Se construye la dimensión de la columna Y de la tabla de verdad en función de la cantidad de variables escogidas"
+def ConstruirY (num_variables): 
     
-    Y6var_lista = Y.split(",")
+    Yvar = "0"  
+    Yaux = ",0" 
+    
+    for i in range(1,(2**num_variables),1):
+        Yvar = Yvar+Yaux
+        
+    return Yvar #Se retorna el string base de 2**n ceros
+
+
+"Se construye la columna Y de la tabla de verdad en función de la suma de minterminos"
+def ObtenerYtts (minterminos, Y): #Se recibe una lista de mintérminos y una "máscara" de la columna Y con 2**n ceros
+    
+    Y6var_lista = Y.split(",") 
     
     minTer = minterminos  
     minTer_int = list(map(int,  minTer))
     Y6var_int_list = list(map(int, Y6var_lista))
     
-
     for i in minTer_int :
         Y6var_int_list[i] = 1
     
-   
     Y6var_int_list = list(map(str, Y6var_int_list))
     Ytts = "".join(Y6var_int_list)
    
-    return Ytts
+    return Ytts #Se retorna la columna Y de la tabla de verdad 
 
 
-
-def EspressoMin (num_variables,Ytts):
-    X = ttvars('x', num_variables)
-    fbool = truthtable(X,Ytts)
-    fboolm = espresso_tts(fbool)
-    return fboolm
+"Minimización de tablas de verdad con el algoritmo Espresso"
+def EspressoMin (num_variables,Ytts): #Se recibe la cantidad de variables y las salidas de la tabla de verdad
+    
+    X = ttvars('x', num_variables) #Se diferencian las variables de acuerdo a su posición
+    fbool = truthtable(X,Ytts) #Se define la función booleana con las variables y la tabla de verdad
+    fboolm = espresso_tts(fbool) #Se minimiza la función booleana
+    
+    return fboolm #Se retorna la función booleana minimizada
 
 #----------------------------------------------------------------------------------------------------------------------------------
-
 
 """ SOLICITUD DE DATOS AL USUARIO -----------------------------------------------------------------------------------------------"""
 
@@ -53,6 +61,6 @@ num_variables = int(input("Cantidad de variables: "))
 
 print("\n") 
 
-
-print(EspressoMin(num_variables, ObtenerYtts(minterminos_Lista, Y6var)))
+Y = ConstruirY(num_variables) #Se construye las salidas de la tabla de verdad
+print(EspressoMin(num_variables, ObtenerYtts(minterminos_Lista,Y))) #Se implementa la minimización con Espresso
 
