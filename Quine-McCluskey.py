@@ -44,3 +44,47 @@ Posteriormente, se evalua cual posicion fue la que cambio, y se procede a poner 
 informacion se guarda en el mismo diccionario utilizado para agrupar segun cantidad de unos, pero se elimina su 
 contenido en cada iteración para así no tener que crear diccionarios a cada rato. Este algoritmo iterativo se detiene 
 cuando ya los minterminos tienen más de una diferencia. """
+backup = {}
+no_puedo_seguir_comparando = True
+agrup = 0
+todas_las_apariciones = []
+todos_los_dict = []
+
+while True: # ALGORITMO PARA COMPARAR ITERATIVAMENTE
+    # quiero comparar hasta que ya no se pueda = los bin_mints ya no se pueden comparar con los de los demas grupos
+    # comparar =  ver si solo difieren en 1 digito (bit)
+    backup = conjuntos.copy()
+    conjuntos = {} #Diccionario se limpia para comparar cada vez
+    no_puedo_seguir_comparando = True
+    # para todos los bin_mints de todos los conjuntos: pero cuantos conjuntos hay actualmente?
+    grupos_existentes = sorted(list(backup.keys()))
+    largo_grupos_existentes = len(grupos_existentes) - 1
+
+    # para saber cual agrupacion usar
+    agrup = 0
+
+    for grupo_actual in range(largo_grupos_existentes): # hacerlo para todos los grupos
+        for mint_del_grupo1 in backup[grupos_existentes[grupo_actual]]: # elijo el grupo1
+            for mint_del_grupo2 in backup[grupos_existentes[grupo_actual + 1]]: # elijo el grupo2
+
+                # Sub-algoritmo para evaluar diferencias
+                difiere = 0
+                for digito in range(len(mint_del_grupo1)):
+                    if mint_del_grupo1[digito] != mint_del_grupo2[digito]:
+                        difiere += 1
+                        index_diferencia = digito
+
+                if difiere == 1:
+                    try: # Añadir el mintermino con guiones al diccionario 
+                        conjuntos[agrup].append(str(mint_del_grupo1[:index_diferencia] + "-" + mint_del_grupo1[index_diferencia + 1:]))
+                    except KeyError: # Si la agrupacion no existe, se crea
+                        conjuntos[agrup] = [str(mint_del_grupo1[:index_diferencia] + "-" + mint_del_grupo1[index_diferencia + 1:])]
+
+                    no_puedo_seguir_comparando = False
+
+        agrup += 1
+    todos_los_dict.append(conjuntos) # Añadir el diccionario que contiene a los mints con guiones a una lista de diccionarios
+
+    if no_puedo_seguir_comparando: # Si ya no puedo comparar, salirse del ciclo while
+        break
+
