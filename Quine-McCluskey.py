@@ -188,7 +188,7 @@ for imp_esencial in imp_esenciales:
 
 print("Implicantes primos esenciales en binario: ", respuesta)
 
-#Traducir al alfabeto los impl.primos esenciales y mostrar la respuesta
+#Traducir al alfabeto los impl.primos esenciales
 variable = 0
 funcion = " "
 encabezado = "F("
@@ -211,8 +211,15 @@ for imp in range(len(respuesta)):
         funcion = funcion + " + "
 
 largo = len(usadas)
+usadas_sorted = []
 
 for letra in usadas:
+    usadas_sorted.append(letra)
+
+#Ordenamiento de letras para el encabezado
+usadas_sorted.sort()
+
+for letra in usadas_sorted:
     largo -= 1
     encabezado += letra
 
@@ -221,7 +228,6 @@ for letra in usadas:
     else:
         encabezado += ") = "
 
-# RESPUESTA FINAL: LA FUNCION SIMPLIFICADA 
 stringFuncion = encabezado + funcion
 
 print("\nFUNCION SIMPLIFICADA:\n \n", stringFuncion)
