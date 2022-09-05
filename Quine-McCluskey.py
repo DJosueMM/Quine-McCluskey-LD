@@ -3,6 +3,7 @@ Estudiantes: Jimena León Huertas y David Josué Medina Mayorga | ITCR Diseño L
 
 """ SOLICITUD DE DATOS AL USUARIO --------------------------------------------------------------------------------------
 """
+print()
 int_mints = [int(mint) for mint in input("Suma de mintérminos ").split(",")]  #Genera lista con ints
 vars = int(input("Cantidad de variables: "))
 
@@ -12,7 +13,7 @@ Se parte del hecho de que si tenemos N variables, habra (2^N - 1) minterminos ex
 embargo, para evitar errores posteriores se enviara un mensaje en caso de que el usuario no recuerde este detalle. """
 int_mints.sort()
 if int_mints[len(int_mints)-1] > 2**vars - 1:  #Si tengo 2 variables, el mintérmino mayor debe ser el 3ro = 11 bin
-    print(" \n Entradas invalidas")
+    print("Entradas invalidas ")
     exit()
 
 """ CONVERSION A BINARIO DE LOS MINTERMINOS ----------------------------------------------------------------------------
@@ -35,7 +36,7 @@ for bin_mint in int_bin_mints.values():  #Contar 1's y añadir binarios en un nu
     except:
         conjuntos[bin_mint.count("1")] = [bin_mint]  #Crea nuevo grupo si antes no existía
 
-print(" \nAgrupacion inicial: ", conjuntos.items()) #Imprimir mints binarios
+print("\nAgrupacion inicial: ", conjuntos.items()) #Imprimir mints binarios
 
 """ ENCONTRAR IMPLICANTES PRIMOS ---------------------------------------------------------------------------------------
 Se necesita comparar un mintermino perteneciente a una agrupacion con otro de una agrupacion superior de unos.
@@ -77,7 +78,7 @@ while True: # ALGORITMO PARA COMPARAR ITERATIVAMENTE
                         difiere += 1
                         index_diferencia = digito
 
-                if difiere == 1:
+                if difiere == 1: # añadir el implicante primo al diccionario de conjuntos
                     try:
                         conjuntos[agrup].append(str(mint_del_grupo1[:index_diferencia] + "-" + mint_del_grupo1[index_diferencia + 1:]))
                     except KeyError:
@@ -166,14 +167,61 @@ for mint in mints_sin_repeticion:
     dict_apariciones[mint] = list_mints_imp_primos.count(mint)
 print("Apariciones de cada imp. primo: ", dict_apariciones.items())
 
+#Crear lista de implicantes primos esenciales en formato int
 imp_esenciales = []
 
 for int_mint,apariciones in dict_apariciones.items():
     if apariciones == 1:
         imp_esenciales.append(int_mint)
 
-print(" \n Implicantes primos esenciales: ", imp_esenciales)
+print(" \nImplicantes primos esenciales: ", imp_esenciales)
 
 """ RESPUESTA FINAL CON LETRAS USANDO LOS IMPLICANTES PRIMOS ESENCIALES-------------------------------------------------
 """
-#Usar los minterminos donde aparecen los impl. p. esenciales
+#Usar los minterminos donde aparecen los impl. p. esenciales esta vez en formato binario con guiones
+respuesta = []
+for imp_esencial in imp_esenciales:
+    for i in range(len(mints_implic_primos)):
+        for j in mints_implic_primos[i]:
+            if imp_esencial == j:
+                respuesta.append(implicantes_primos[i])
+
+print("Implicantes primos esenciales en binario: ", respuesta)
+
+#Traducir al alfabeto los impl.primos esenciales y mostrar la respuesta
+variable = 0
+funcion = " "
+encabezado = "F("
+usadas = set()
+letras = ["A","B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+for imp in range(len(respuesta)):
+    for digito in respuesta[imp]:
+        if digito == "0":
+            funcion = funcion + letras[variable] + "'"
+            usadas.add(letras[variable])
+        if digito == "1":
+            funcion = funcion + letras[variable]
+            usadas.add(letras[variable])
+
+        variable += 1
+    variable = 0
+
+    if imp != len(respuesta)-1:
+        funcion = funcion + " + "
+
+largo = len(usadas)
+
+for letra in usadas:
+    largo -= 1
+    encabezado += letra
+
+    if largo != 0:
+        encabezado += ", "
+    else:
+        encabezado += ") = "
+
+# RESPUESTA FINAL: LA FUNCION SIMPLIFICADA 
+stringFuncion = encabezado + funcion
+
+print("\nFUNCION SIMPLIFICADA:\n \n", stringFuncion)
