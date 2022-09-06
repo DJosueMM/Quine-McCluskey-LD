@@ -5,11 +5,11 @@ PyEDA https://github.com/cjdrake/pyeda incluye una extensión de la librería de
   no oficial de python el cuál solo funciona para Python 3.9 (o inferiores con un nuevo archivo .whl)
 """
 from pyeda.inter import * 
+
 import string
 
 
 #FUNCIONES
-
 
 "Se construye la dimensión de la columna Y de la tabla de verdad en función de la cantidad de variables escogidas"
 def ConstruirY (num_variables): 
@@ -50,6 +50,14 @@ def EspressoMin (num_variables,Ytts): #Se recibe la cantidad de variables y las 
     
     return fboolm #Se retorna la función booleana minimizada
 
+def SumaMinterminos (Fbool):
+
+    Fbool = "".join(Fbool)  
+    print (Fbool)
+
+    return
+
+
 #----------------------------------------------------------------------------------------------------------------------------------
 
 """ SOLICITUD DE DATOS AL USUARIO -----------------------------------------------------------------------------------------------"""
@@ -62,5 +70,8 @@ num_variables = int(input("Cantidad de variables: "))
 print("\n") 
 
 Y = ConstruirY(num_variables) #Se construye las salidas de la tabla de verdad
-print(EspressoMin(num_variables, ObtenerYtts(minterminos_Lista,Y))) #Se implementa la minimización con Espresso
+res = EspressoMin(num_variables, ObtenerYtts(minterminos_Lista,Y))
+
+
+print(list(res))#Se implementa la minimización con Espresso
 
