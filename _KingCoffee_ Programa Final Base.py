@@ -51,19 +51,19 @@ class Quine(Frame):
 
         #Botón Minimizar
         self.boton_Quine = Button(self.master, text="Minimizar",command=self.QN)
-        self.boton_Quine.place(x=135,y=220)
+        self.boton_Quine.place(x=135,y=290)
         self.boton_Quine.config(bd=10, relief=RAISED)
         self.boton_Quine.config(bg='#154360',fg='white',font=('Arial',11,'bold normal'))
         
         #Botón Limpiar
         self.boton_Quine = Button(self.master, text="Limpiar",command=self.Limpiar_QN)
-        self.boton_Quine.place(x=70,y=290)
+        self.boton_Quine.place(x=30,y=290)
         self.boton_Quine.config(bd=10, relief=RAISED)
         self.boton_Quine.config(bg='#154360',fg='white',font=('Arial',11,'bold normal'))
         
         #Botón Salir
         self.boton_salir = Button(self.master, text="Salir",command=self.salir)
-        self.boton_salir.place(x=215,y=290)
+        self.boton_salir.place(x=255,y=290)
         self.boton_salir.config(bd=10, relief=RAISED)
         self.boton_salir.config(bg='#154360',fg='white',font=('Arial',11,'bold normal'))
         
@@ -76,7 +76,7 @@ class Quine(Frame):
         int_mints = [int(mint) for mint in self.E1.get().split(",")]  #Genera lista con ints
         vars = int(self.E2.get())
         
-    
+        QNstart = time.perf_counter_ns()
         """ CONVERSION A BINARIO DE LOS MINTERMINOS ----------------------------------------------------------------------------
         Se usará la función bin() para convertir a binario cada mintermino (suponiendo que la tabla de verdad estaba ordenada 
         y cada minterm corresponde a su num en binario). Se ignora un prefijo que devuelve la función utilizada y luego se 
@@ -282,13 +282,23 @@ class Quine(Frame):
                 encabezado += ") = "
     
         stringFuncion = encabezado + funcion
+        QNend = time.perf_counter_ns()
+        
+        QNduracion = (QNend-QNstart)/1000
         
         #Muestra el resultado de la función minimizada
-        self.etiq=Label(self.master,text="La función minimizada es:\n"+stringFuncion)
+        self.etiq=Label(self.master,text="La función minimizada es:\n"+stringFuncion+ "\n\n Tiempo de ejecución: "+ str(QNduracion)+ "us")
         self.etiq.config(bg="#CDD1FE", fg='black',font=('Arial',9))
         self.etiq.pack(pady=40,anchor=CENTER)
         self.etiq.place(x=80, y=170)
-        
+
+       
+
+
+
+#Registro de duración
+
+
 
         
     #Función Limpiar: Borra las entradas utilizadas por el usuario para poder minimizar nuevamente   
@@ -352,23 +362,23 @@ class Espresso(Frame):
         #Label numero de variables
         self.eti=Label(self.master,text="Numero de variables")
         self.eti.config(bg="#CDD1FE", fg='black',font=('Arial',10))
-        self.eti.place(x= 80, y= 120)
+        self.eti.place(x= 80, y= 167)
       
         #Entry para el numero de variables
         self.valor_N = Entry(self.master,bd = 7, width=10)
-        self.valor_N.place(x = 210, y = 115)
+        self.valor_N.place(x=210, y= 162)
         
         #Label minterminos
         self.ingreso_info =Label(self.master,text="Minterminos:")
         self.ingreso_info.config(bg="#CDD1FE", fg='black',font=('Arial',11))
-        self.ingreso_info.place(x= 80, y= 165)
+        self.ingreso_info.place(x= 80, y= 122)
          
         
         #Entry para la sumatoria de minterminos
         self.cod = Entry(self.master,bd = 7)
         self.cod.config(width=30)
         self.cod.pack(pady=7,anchor=CENTER)
-        self.cod.place(x=210, y= 162, width= 200, height=35)
+        self.cod.place(x = 210, y = 115, width= 215, height=35)
   
     
     #Función Limpiar_espacios: borra los datos ingresados por el usuario
@@ -377,6 +387,7 @@ class Espresso(Frame):
         self.cod.delete(0,END)
         self.texto.delete(1.0,END)
         self.valor_N.delete(0,END)
+        self.etiq.destroy()
 
         
     def Minimizar_Espresso(self):
@@ -429,20 +440,27 @@ class Espresso(Frame):
   
         
         #Se construye las salidas de la tabla de verdad
+        
         Y = ConstruirY(num_variables) 
         
-        
-        
+        EsspStart = time.perf_counter_ns()
         A = EspressoMin(num_variables, ObtenerYtts(minterminos_Lista,Y))
-
+        EsspEnd = time.perf_counter_ns()
+        
+        
+        #Registro de duración
+        EsspDuracion = (EsspEnd-EsspStart)/1000
         
         #Textbox de la funcion minimizada
         self.texto=Text(self.master)
         self.texto.insert(INSERT, "La función minimizada es:\n"+str(A))
         self.texto.config(bg="#FFFFFF", fg='black',font=('Arial',9))
-        self.texto.place(x=10, y=200, width= 400, height = 200)
+        self.texto.place(x=10, y=200, width= 425, height = 140)
         
-
+        self.etiq=Label(self.master,text="Tiempo de ejecución: "+ str(EsspDuracion)+ "us")
+        self.etiq.config(bg="#CDD1FE", fg='black',font=('Arial',9))
+        self.etiq.pack(pady=40,anchor=CENTER)
+        self.etiq.place(x=130, y=405)
         
     
     #Función salir: destruye la ventana de la clase Espresso y regresa a la ventana principal
